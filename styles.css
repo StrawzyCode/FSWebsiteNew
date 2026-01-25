@@ -1,0 +1,606 @@
+/* styles.css */
+
+/* Local font files */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("fonts/PlusJakartaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("fonts/PlusJakartaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+html.no-scroll {
+  overflow: hidden;
+}
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  overflow-x: hidden;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  color: #2382c0;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1110px;
+  margin: 0 auto;
+}
+
+/* ✅ IMPORTANT: add padding on small screens so text never touches edges */
+@media (max-width: 767px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+/* Headings */
+h1,
+h2 {
+  margin: 0;
+  text-transform: uppercase;
+}
+h1,
+h2 {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 45px;
+}
+@media (min-width: 768px) {
+  h1,
+  h2 {
+    font-size: 45px;
+    line-height: 84px;
+  }
+}
+h1 {
+  letter-spacing: 5px;
+}
+h4 {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(35, 130, 192, 0.7);
+}
+
+/* =========================
+   Header
+========================= */
+header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  width: 100%;
+  z-index: 777;
+  padding-bottom: 30px;
+  background: linear-gradient(0deg, transparent, rgba(0, 0, 0, 0.8));
+}
+@media (min-width: 768px) {
+  header {
+    height: 110px;
+    padding-top: 10px;
+  }
+}
+header .header-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 20px 0 0; /* uses container padding now */
+}
+@media (min-width: 768px) {
+  header .header-wrapper {
+    justify-content: space-between;
+    padding: 0;
+  }
+}
+
+/* Logo float */
+@keyframes logoFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+  100% { transform: translateY(0); }
+}
+header .logo {
+  width: 30vw;
+  max-width: 170px;
+  margin-right: auto;
+  animation: logoFloat 6s ease-in-out infinite;
+  transition: transform 300ms ease, filter 300ms ease;
+}
+header .logo:hover {
+  transform: translateY(-3px) scale(1.05);
+  filter: drop-shadow(0 0 14px rgba(35, 130, 192, 0.6));
+}
+@media (max-width: 767px) {
+  header .logo a svg {
+    width: 30vw;
+  }
+}
+
+/* =========================
+   Desktop nav
+========================= */
+header nav {
+  display: none;
+  margin-top: 28px;
+}
+@media (min-width: 768px) {
+  header nav {
+    display: block;
+    margin-top: 0;
+  }
+}
+header nav .navbar-nav {
+  display: flex;
+  align-items: center;
+}
+header nav .nav-item {
+  margin-right: 19px;
+}
+@media (min-width: 992px) {
+  header nav .nav-item {
+    margin-right: 36px;
+  }
+  header nav .nav-item:last-child {
+    margin-right: 0;
+  }
+}
+
+/* Link style */
+header nav .nav-link {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 10px 6px;
+  display: inline-block;
+  position: relative;
+  transition: transform 180ms ease, color 180ms ease, text-shadow 180ms ease;
+}
+header nav .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 2px;
+  background: #2382c0;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+header nav .nav-link:hover {
+  color: #2382c0;
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(35, 130, 192, 0.35);
+}
+header nav .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Join Us desktop button */
+header nav .nav-item:last-child .nav-link::after {
+  display: none;
+}
+header nav .nav-item:last-child .nav-link {
+  padding: 10px 18px;
+  border-radius: 999px;
+  background-color: #2381c0;
+  color: #000;
+  border: 2px solid #2382c0;
+  overflow: hidden;
+}
+header nav .nav-item:last-child .nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #00000000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 320ms ease;
+  z-index: 0;
+}
+header nav .nav-item:last-child .nav-link > * {
+  position: relative;
+  z-index: 1;
+}
+header nav .nav-item:last-child .nav-link:hover {
+  background-color: transparent;
+  color: #2381c0;
+  border-color: #2381c0;
+  box-shadow: 0 0 18px rgba(35, 130, 192, 0.45);
+}
+header nav .nav-item:last-child .nav-link:hover::before {
+  transform: scaleX(1);
+}
+
+/* =========================
+   Mobile hamburger
+========================= */
+#mobile-menu-toggle {
+  width: 30px;
+  height: 22px;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 3000;
+}
+@media (min-width: 768px) {
+  #mobile-menu-toggle {
+    display: none;
+  }
+}
+#mobile-menu-toggle .line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: transform 280ms ease, opacity 220ms ease, top 280ms ease,
+    background-color 220ms ease;
+}
+#mobile-menu-toggle .line-1 { top: 2px; }
+#mobile-menu-toggle .line-2 { top: 10px; width: 70%; }
+#mobile-menu-toggle .line-3 { top: 18px; }
+#mobile-menu-toggle.toggled .line { background-color: #2382c0; }
+#mobile-menu-toggle.toggled .line-1 { top: 10px; transform: rotate(45deg); }
+#mobile-menu-toggle.toggled .line-2 { opacity: 0; }
+#mobile-menu-toggle.toggled .line-3 { top: 10px; transform: rotate(-45deg); }
+
+/* =========================
+   Mobile menu overlay (covers header too)
+========================= */
+@media (max-width: 767px) {
+  header nav {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+
+    max-height: 0;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transform: translateY(-8px);
+    transition:
+      max-height 360ms ease,
+      opacity 240ms ease,
+      transform 300ms ease,
+      background 300ms ease,
+      visibility 0s linear 360ms;
+
+    z-index: 2000;
+  }
+
+  header nav .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 110px 20px 28px;
+  }
+
+  header nav .nav-item {
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity 260ms ease, transform 260ms ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    padding: 6px 0;
+  }
+  header nav .nav-item:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  header nav .nav-link {
+    font-size: 18px;
+    padding: 14px 8px;
+    width: 100%;
+  }
+
+  header.mobile-menu-opened nav {
+    max-height: 100vh;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+
+    background: rgba(0, 0, 0, 0.96);
+
+    transition:
+      max-height 420ms ease,
+      opacity 240ms ease,
+      transform 300ms ease,
+      background 300ms ease,
+      visibility 0s;
+  }
+
+  header.mobile-menu-opened nav .nav-item {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  header.mobile-menu-opened nav .nav-item:nth-child(1) { transition-delay: 80ms; }
+  header.mobile-menu-opened nav .nav-item:nth-child(2) { transition-delay: 140ms; }
+  header.mobile-menu-opened nav .nav-item:nth-child(3) { transition-delay: 200ms; }
+  header.mobile-menu-opened nav .nav-item:nth-child(4) { transition-delay: 260ms; }
+  header.mobile-menu-opened nav .nav-item:nth-child(5) { transition-delay: 320ms; }
+  header.mobile-menu-opened nav .nav-item:nth-child(6) { transition-delay: 380ms; }
+
+  header nav .nav-item:last-child .nav-link {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 14px 8px;
+    color: #fff;
+  }
+  header nav .nav-item:last-child .nav-link::before {
+    display: none;
+  }
+}
+
+/* =========================
+   Footer
+========================= */
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 0;
+}
+.footer-column {
+  flex: 0 0 200px;
+  margin: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.unilogo {
+  height: 70px;
+  width: auto;
+}
+.footer-column .social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-column {
+    margin: 10px 0;
+  }
+}
+
+
+/* =========================
+   HISTORY TIMELINE FIXES (uniform cards + floating controls)
+   Paste at very bottom of styles.css
+========================= */
+
+:root {
+  --brand-blue: #2382c0;
+}
+
+/* Floating controls (fixed bottom-right) */
+.history-controls {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9999;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.55);
+}
+
+.history-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.history-control span {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.history-control select {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 36px 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: none;
+  min-width: 110px;
+}
+
+.history-control select:focus {
+  border-color: rgba(35, 130, 192, 0.55);
+  box-shadow: 0 0 0 3px rgba(35, 130, 192, 0.18);
+}
+
+.history-control-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+@media (hover: hover) {
+  .history-control-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(35, 130, 192, 0.35);
+    box-shadow: 0 0 18px rgba(35, 130, 192, 0.18);
+  }
+}
+
+/* Ensure content doesn't sit under fixed controls on tiny screens */
+@media (max-width: 600px) {
+  .history-controls {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    justify-content: space-between;
+  }
+}
+
+/* Pills + muted helpers */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-height: 72px;     /* prevents cards from growing */
+  overflow: hidden;      /* keeps all cards same height */
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  white-space: nowrap;
+}
+
+.muted {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Uniform card sizing */
+.timeline-card {
+  width: min(540px, 100%);
+  height: clamp(430px, 46vw, 520px); /* ✅ all cards same height */
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.timeline-year {
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+}
+
+.timeline-carname {
+  font-weight: 800;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-align: right;
+}
+
+/* Make image area consistent so cards don't resize */
+.timeline-media {
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Keep info consistent */
+.timeline-info {
+  flex: 0 0 auto;
+}
+
+/* Notes uses remaining space (and clamps) */
+.timeline-notes {
+  margin-top: 10px;
+  flex: 1 1 auto;
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;  /* clamps long notes to keep same height */
+  -webkit-box-orient: vertical;
+}
+
+/* Extra smoothness hints */
+.timeline-card,
+.timeline-dot,
+.timeline-line-fill {
+  will-change: transform, opacity;
+}
+.timeline-media img {
+  will-change: transform;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .history-controls,
+  .timeline-card,
+  .history-control-btn {
+    transition: none !important;
+  }
+}
