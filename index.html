@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="The Swansea University Formula Student team designing and building a competitive race car for UK Formula Student competitions.">
+    <meta name="description" content="The Swansea University Formula Student team designing and building a competitive race car for the 2026/27 UK Formula Student season.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Swansea University Formula Student Team | Swansea UniFS</title>
 
@@ -21,15 +21,15 @@
           <div class="logo">
             <a href="/index.html" aria-label="Home">
               <svg
-                viewBox="0 0 257 143"
+                viewBox="0 0 1177 738"
                 xmlns="http://www.w3.org/2000/svg"
                 role="img"
-                aria-label="Swansea University"
+                aria-label="Swansea University Race Engineering"
               >
                 <image
-                  href="public/logo.png"
-                  width="257"
-                  height="143"
+                  href="public/SURE-logo-2026-header.webp"
+                  width="1177"
+                  height="738"
                   preserveAspectRatio="xMidYMid meet"
                 />
               </svg>
@@ -61,7 +61,7 @@
         <img
           loading="eager"
           src="public/fdb1e5d2-beea-47aa-aff0-b6995ad927cb.png"
-          alt="Formula 2 banner"
+          alt="Swansea University Formula Student car on track"
         />
       </picture>
     </div>
@@ -71,19 +71,20 @@
         <div class="container">
           <div class="expertise">
             <div class="block-left">
+              <p class="season-tag">2026/27 Season</p>
               <h1 class="title">Swansea University FS</h1>
 
               <div class="description">
                 We are Swansea University Race Engineering, a student-led motorsport team
-                driven by a passion for innovation and engineering excellence. Competing
-                in the prestigious Formula Student competition, our team brings together
-                students from diverse disciplines to design, build, and race a high-performance
-                car. Through teamwork, creativity, and dedication, we aim to build our skills
-                and knowledge, representing Swansea University on an international stage.
+                driven by a passion for innovation and engineering excellence. The 2026/27
+                season is underway, with a new team designing, building, and racing our next
+                car for the prestigious Formula Student competition at Silverstone. Through
+                teamwork, creativity, and dedication, we aim to build our skills and knowledge,
+                representing Swansea University on an international stage.
               </div>
 
               <div class="controls">
-                <h4>Countdown to Silverstone</h4>
+                <h4>Countdown to Silverstone 2027</h4>
 
                 <div id="countdown">
                   <div class="countdown-item">
@@ -109,7 +110,7 @@
             <div class="block-right">
               <div class="img-wrapper">
                 <picture>
-                  <img loading="eager" src="public/Untitled copy.jpg" alt="Formula 2 image" />
+                  <img loading="eager" src="public/Untitled copy.jpg" alt="Swansea University Race Engineering team with the car" />
                 </picture>
               </div>
             </div>
@@ -136,20 +137,6 @@
               <img alt="Llando Tuning (black and white)" class="bw" src="public/sponsors/ltcdarkbw.png" />
               <a aria-label="Llando Tuning" href="https://tuning.wales/" target="_blank" rel="noopener">
                 <img alt="Llando Tuning" class="colorimage" src="public/sponsors/ltcdark.png" />
-              </a>
-            </div>
-
-            <div class="sponsor-logo">
-              <img alt="Vita (black and white)" class="bw" src="public/sponsors/VitaBW.png" />
-              <a aria-label="Vita" href="https://www.thevitagroup.com/" target="_blank" rel="noopener">
-                <img alt="Vita" class="colorimage" src="public/sponsors/VitaColour.png" />
-              </a>
-            </div>
-
-            <div class="sponsor-logo">
-              <img alt="Rapid Harness (black and white)" class="bw" src="public/sponsors/Rapid-Harness-Logobw.png" />
-              <a aria-label="Rapid Harness" href="https://rapidharness.com/" target="_blank" rel="noopener">
-                <img alt="Rapid Harness" class="colorimage" src="public/sponsors/Rapid-Harness-Logo.png" />
               </a>
             </div>
 
@@ -223,7 +210,8 @@
 
     <script>
       // ===== Countdown =====
-      const targetDate = new Date("July 15, 2026 00:00:00").getTime();
+      // FS UK 2027 dates not yet announced: provisional mid-July start, update once IMechE confirms
+      const targetDate = new Date("July 14, 2027 00:00:00").getTime();
       const countdownFunction = setInterval(() => {
         const now = new Date().getTime();
         const distance = targetDate - now;
