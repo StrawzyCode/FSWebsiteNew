@@ -383,6 +383,13 @@ header nav .nav-item:last-child .nav-link:hover::before {
   max-height: 100vh;
   overflow: hidden;
   position: relative;
+  /* start below the solid fixed header (logo height + padding) so the top of the photo isn't hidden */
+  margin-top: calc(24vw * 738 / 1177 + 23px);
+}
+@media (min-width: 768px) {
+  .header-banner {
+    margin-top: 105px;
+  }
 }
 .header-banner img {
   width: 100%;
