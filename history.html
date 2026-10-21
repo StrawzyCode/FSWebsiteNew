@@ -6,7 +6,7 @@
     <title>Swansea Formula Student — History</title>
 
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico?v=2" />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -22,8 +22,8 @@
         <div class="header-wrapper">
           <div class="logo">
             <a href="/index.html" aria-label="Home">
-              <svg viewBox="0 0 1177 738" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Swansea University Race Engineering">
-                <image href="public/SURE-logo-2026-header.webp" width="1177" height="738" preserveAspectRatio="xMidYMid meet" />
+              <svg viewBox="0 0 520 324" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Swansea University Race Engineering">
+                <image href="public/SURE-logo-header.webp" width="520" height="324" preserveAspectRatio="xMidYMid meet" />
               </svg>
             </a>
           </div>
@@ -56,8 +56,8 @@
         <div class="history-hero">
           <h2 class="history-title">Our History</h2>
           <p class="history-subtitle">
-            Scroll through our cars from <strong>2026</strong> back to <strong>2001</strong>.
-            Each year shows the car image, competitions attended, and world rank.
+            Scroll through every Swansea car, from <strong>S26</strong> (2026) back to our
+            first, <strong>S01</strong> (2001).
           </p>
         </div>
 
@@ -70,10 +70,6 @@
           <div id="timelineItems"></div>
         </section>
 
-        <p class="history-footnote">
-          To <strong>skip a year</strong> (e.g. <code>2003</code>), remove that entry from
-          <code>timelineData</code> in the script.
-        </p>
       </div>
 
       <!-- ✅ Floating controls (now fixed, not sticky) -->
@@ -220,16 +216,33 @@
 
         /**
          * EDIT THIS ARRAY:
-         * - Add real images + stats
-         * - To SKIP a year (e.g. 2003) just remove that object
+         * - One entry per car; images live in public/Swansea Cars/
+         * - First image is the main one, any extras show as thumbnails
+         * - competitions / worldRank / notes are optional and only show when filled in
+         * - Years with no car photo (2003, 2006, 2009, 2018, 2020, 2022) are left out
          */
+        const CARS_DIR = "public/Swansea Cars/";
         const timelineData = [
-          { year: 2026, carName: "SR-26 (Placeholder)", image: "public/cars/2026.jpg", competitions: ["FS UK", "FS Germany"], worldRank: 42, notes: "New aero package and lightweight chassis iteration." },
-          { year: 2025, carName: "SR-25 (Placeholder)", image: "public/cars/2025.jpg", competitions: ["FS UK"], worldRank: 55, notes: "Focus on reliability and manufacturability improvements." },
-          { year: 2024, carName: "SR-24 (Placeholder)", image: "public/cars/2024.jpg", competitions: ["FS UK", "FS Austria"], worldRank: 61, notes: "Powertrain upgrades with improved cooling performance." },
-          // ...
-          { year: 2002, carName: "SR-02 (Placeholder)", image: "public/cars/2002.jpg", competitions: ["FS UK"], worldRank: null, notes: "Early platform development." },
-          { year: 2001, carName: "SR-01 (Placeholder)", image: "public/cars/2001.jpg", competitions: ["FS UK"], worldRank: null, notes: "First-year entry and team foundations." },
+          { year: 2026, carName: "S26", images: ["S26.jpg"] },
+          { year: 2025, carName: "S25", images: ["S25.jpg"] },
+          { year: 2024, carName: "S24", images: ["S24.png"] },
+          { year: 2023, carName: "S23", images: ["S23.jpeg"] },
+          { year: 2021, carName: "S21", images: ["S21.jpg", "S21second.jpg"] },
+          { year: 2019, carName: "S19", images: ["S19.jpg"] },
+          { year: 2017, carName: "S17", images: ["S17.jpg"] },
+          { year: 2016, carName: "S16", images: ["S16.jpg"] },
+          { year: 2015, carName: "S15", images: ["S15.jpg"] },
+          { year: 2014, carName: "S14", images: ["S14.jpg", "scan_2370047_2025-09-26-10-57-58_2(1).jpeg"], notes: "Event programme entry for Swansea's first electric race car." },
+          { year: 2013, carName: "S13", images: ["S13.jpeg", "S13.png"] },
+          { year: 2012, carName: "S12", images: ["S12.jpg"] },
+          { year: 2011, carName: "S11", images: ["S11.jpg"] },
+          { year: 2010, carName: "S10", images: ["S10.jpg"] },
+          { year: 2008, carName: "S08", images: ["S08.jpg"] },
+          { year: 2007, carName: "S07", images: ["S07.jpeg", "S07(1).jpeg"], notes: "SIFS07, Swansea Institute's sixth Class 1 entry, built around a tubular space frame with a Honda CBR 600 engine." },
+          { year: 2005, carName: "S05", images: ["S05.jpeg", "S05cad.jpeg"] },
+          { year: 2004, carName: "S04", images: ["S04.jpg"] },
+          { year: 2002, carName: "S02", images: ["S02.jpg"] },
+          { year: 2001, carName: "S01", images: ["S01.jpg"] },
         ].sort((a, b) => b.year - a.year);
 
         const itemsRoot = document.getElementById("timelineItems");
@@ -238,11 +251,34 @@
         const fillEl = document.getElementById("timelineFill");
         const timelineEl = document.getElementById("timeline");
 
+        const imgUrl = (file) => encodeURI(CARS_DIR + file);
+
         // Build timeline DOM (uniform cards)
         itemsRoot.innerHTML = timelineData
           .map((d) => {
+            const images = d.images || [];
             const comps = (d.competitions || []).map((c) => `<span class="pill">${escapeHtml(c)}</span>`).join("");
-            const rank = d.worldRank == null ? "—" : `#${d.worldRank}`;
+            const alt = escapeAttr(`${d.carName || "Car"} from ${d.year}`);
+            const main = images[0] ? imgUrl(images[0]) : "";
+
+            const thumbs =
+              images.length > 1
+                ? `<div class="timeline-thumbs">
+                    ${images
+                      .map(
+                        (f, i) => `
+                      <button class="timeline-thumb${i === 0 ? " is-active" : ""}" type="button" data-src="${escapeAttr(imgUrl(f))}" aria-label="${escapeAttr(`Show image ${i + 1} of ${d.carName}`)}">
+                        <img src="${escapeAttr(imgUrl(f))}" alt="" loading="lazy" />
+                      </button>`
+                      )
+                      .join("")}
+                  </div>`
+                : "";
+
+            const info = [
+              comps ? `<div class="info-row"><span class="info-label">Competitions</span><span class="info-value pills">${comps}</span></div>` : "",
+              d.worldRank != null ? `<div class="info-row"><span class="info-label">World Rank</span><span class="info-value">#${d.worldRank}</span></div>` : "",
+            ].join("");
 
             return `
               <article class="timeline-item" id="year-${d.year}" data-year="${d.year}">
@@ -254,27 +290,46 @@
                     <div class="timeline-carname">${escapeHtml(d.carName || "")}</div>
                   </div>
 
-                  <div class="timeline-media">
-                    <img src="${escapeAttr(d.image)}" alt="${escapeAttr(`Car from ${d.year}`)}" loading="lazy" />
-                  </div>
+                  ${
+                    main
+                      ? `<a class="timeline-media" href="${escapeAttr(main)}" target="_blank" rel="noopener">
+                          <img src="${escapeAttr(main)}" alt="${alt}" loading="lazy" />
+                        </a>`
+                      : ""
+                  }
 
-                  <div class="timeline-info">
-                    <div class="info-row">
-                      <span class="info-label">Competitions</span>
-                      <span class="info-value pills">${comps || "<span class='muted'>—</span>"}</span>
-                    </div>
-                    <div class="info-row">
-                      <span class="info-label">World Rank</span>
-                      <span class="info-value">${rank}</span>
-                    </div>
-                  </div>
+                  ${thumbs}
 
-                  ${d.notes ? `<p class="timeline-notes">${escapeHtml(d.notes)}</p>` : `<p class="timeline-notes muted">—</p>`}
+                  ${info ? `<div class="timeline-info">${info}</div>` : ""}
+
+                  ${d.notes ? `<p class="timeline-notes">${escapeHtml(d.notes)}</p>` : ""}
                 </div>
               </article>
             `;
           })
           .join("");
+
+        // Thumbnails swap the main image (and its full-size link)
+        itemsRoot.addEventListener("click", (e) => {
+          const thumb = e.target.closest(".timeline-thumb");
+          if (!thumb) return;
+          const card = thumb.closest(".timeline-card");
+          const media = card.querySelector(".timeline-media");
+          media.querySelector("img").src = thumb.dataset.src;
+          media.href = thumb.dataset.src;
+          card.querySelectorAll(".timeline-thumb").forEach((t) => t.classList.toggle("is-active", t === thumb));
+        });
+
+        // Portrait shots and programme scans: show the whole image instead of cropping
+        itemsRoot.addEventListener(
+          "load",
+          (e) => {
+            const img = e.target;
+            if (img.tagName !== "IMG" || !img.parentElement.classList.contains("timeline-media")) return;
+            img.parentElement.classList.toggle("is-portrait", img.naturalHeight > img.naturalWidth);
+          },
+          true
+        );
 
         // Populate jump dropdown
         yearJump.innerHTML = timelineData.map((d) => `<option value="${d.year}">${d.year}</option>`).join("");
