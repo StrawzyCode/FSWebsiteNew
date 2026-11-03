@@ -645,6 +645,24 @@ header nav .nav-item:last-child .nav-link:hover::before {
   }
 }
 
+/* Name-only tiles for sponsors whose logo files aren't in public/sponsors/ yet */
+.partners-section .sponsor-logo .sponsor-name {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 14px;
+  color: var(--white);
+  font-size: clamp(15px, 1.6vw, 20px);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.partners-section .sponsor-logo a.sponsor-name:hover {
+  color: var(--white);
+}
+
 /* Touch devices: don't hide the color version on tap-only screens */
 @media (hover: none) {
   .partners-section .sponsor-logo .colorimage {
@@ -1301,4 +1319,36 @@ header nav .nav-item:last-child .nav-link:hover::before {
     background: transparent;
     color: var(--navy);
   }
+}
+
+/* =========================
+   SPONSORS PAGE
+========================= */
+.sponsors-page {
+  padding-top: clamp(110px, 16vw, 150px);
+  padding-bottom: clamp(40px, 7vw, 80px);
+}
+.sponsors-title {
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 46px);
+  margin: 0 0 14px;
+}
+.sponsors-intro {
+  max-width: 70ch;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.6;
+  color: rgba(var(--navy-rgb), 0.78);
+}
+.sponsors-cta {
+  text-align: center;
+}
+.sponsors-cta h3 {
+  margin: 0 0 8px;
+}
+.sponsors-cta a {
+  font-weight: 700;
+  text-decoration: underline;
 }
