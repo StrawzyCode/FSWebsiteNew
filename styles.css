@@ -1378,13 +1378,12 @@ a.gallery-load-more {
   outline-offset: 4px;
 }
 
-/* Logo panel: white logo on navy, swaps to the full-colour logo on hover */
+/* Logo panel: white logo on navy, swaps to the colour logo on hover (panel stays navy) */
 .partner-card__media {
   position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--navy);
-  transition: background-color 260ms ease;
 }
 .partner-card__logo {
   position: absolute;
@@ -1450,12 +1449,12 @@ a.gallery-load-more {
     border-color: rgba(var(--navy-rgb), 0.35);
     box-shadow: 0 24px 40px rgba(var(--navy-rgb), 0.22);
   }
-  /* logos drawn for light backgrounds get a light panel when shown in colour */
-  .partner-card:hover .partner-card__media.is-light {
-    background: #f2f4f9;
-  }
-  .partner-card:hover .partner-card__logo--mono {
+  /* cards with no colour logo (only the white one) keep the white logo */
+  .partner-card:hover .partner-card__logo--mono:not(:only-child) {
     opacity: 0;
+  }
+  .partner-card:hover .partner-card__logo--mono:only-child {
+    transform: translate(-50%, -50%) scale(1.04);
   }
   .partner-card:hover .partner-card__logo--colour {
     opacity: 1;
@@ -1598,7 +1597,7 @@ a.gallery-load-more {
   transform: translateX(5px);
 }
 
-/* Logo panel: navy for logos drawn for dark backgrounds, light tint for the rest */
+/* Logo panel: colour logo on navy (dark lettering uses the *-ondark.png copies) */
 .sponsor-detail__logo {
   order: -1;
   display: grid;
@@ -1606,10 +1605,6 @@ a.gallery-load-more {
   aspect-ratio: 16 / 10;
   background: var(--navy);
   box-shadow: 0 18px 30px rgba(var(--navy-rgb), 0.15);
-}
-.sponsor-detail__logo.is-light {
-  background: #f2f4f9;
-  border: 1px solid rgba(var(--navy-rgb), 0.1);
 }
 .sponsor-detail__logo img {
   width: auto;
